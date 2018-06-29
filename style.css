@@ -1,0 +1,28 @@
+nav {
+    height: 20px;
+    min-width: 690px;
+}
+
+table {
+    border: 1px black solid;
+    min-width: 690px;
+}
+
+.form-group {
+    display: block;
+    padding: 10px;
+}
+
+#form-contain {
+    margin-bottom: 50px;
+    border: 1px black solid;
+    min-width: 690px;
+    padding: 10px;
+}
+
+#submit {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+

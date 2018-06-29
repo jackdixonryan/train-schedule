@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Page Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--Bootstrap CDN (Hopefully.)-->
+        <link rel="stylesheet" type="text/css" media="screen" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+        <!--Bootswatch lux link-->
+        <link rel="stylesheet" type="text/css" media="screen" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+
+        <!--Custom styles-->
+        <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+    </head>
+
+    <body>
+        <div class="jumbotron">
+            <h2 class="display-3">It's a train</h4>
+            <br>
+            <p class="lead">Maximum Derek</p>
+        </div>
+
+        <div class="container" id="schedule-contain">
+            <nav class="navbar bg-dark navbar-dark">
+                <p>Current Train Schedule</p>
+            </nav>
+            <table class="table table-hover" id="table">
+                <thead>
+                    <th scope="col">Train Name</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Frequency (min)</th>
+                    <th scope="col">Next Arrival</th>
+                    <th scope="col">Minutes Away</th>
+                </thead>
+                <tbody id="table-body">
+                    <tr>
+                        <th scope="row">The Train</th>
+                        <td>Mindy Saint Claire's</td>
+                        <td>11</td>
+                        <td>5:30</td>
+                        <td>4:00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">The Train</th>
+                        <td>Westworld</td>
+                        <td>20</td>
+                        <td>7:30</td>
+                        <td>6:00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container" id="form-contain">
+            <nav class="navbar bg-dark navbar-light">
+                <p>Add Train</p>
+            </nav>
+            <div class="form-group">
+                <label for="name">Train Name</label>
+                <input type="name" class="form-control" id="name" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <input type="destination" class="form-control" id="destination" placeholder="New York">
+            </div>
+            <div class="form-group">
+                <label for="first-time">First Train Time (HH:mm -- Military Time)</label>
+                <input type="first-time" class="form-control" id="first-time" placeholder="23:50">
+            </div>
+            <div class="form-group">
+                <label for="frequency">Frequency (Minutes)</label>
+                <input type="frequency" class="form-control" id="frequency" placeholder="25">
+            </div>
+            <div id="submit">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </div>
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
+        <script src="app.js"></script>
+
+    </body>
+</html>
