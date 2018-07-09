@@ -9,45 +9,53 @@
         <!--Bootstrap CDN (Hopefully.)-->
         <link rel="stylesheet" type="text/css" media="screen" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 
-        <!--Bootswatch lux link-->
+        <!--Bootswatch luxe link-->
         <link rel="stylesheet" type="text/css" media="screen" href="https://bootswatch.com/4/lux/bootstrap.min.css">
 
         <!--Custom styles-->
         <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+
+        <!--fontawesome cdn for icons-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
     </head>
 
     <body>
         <div class="jumbotron">
-            <h2 class="display-3">It's a train</h4>
+            <h2 class="display-3">Union<i class="fas fa-subway"></i>Station</h4>
             <br>
-            <p class="lead">Maximum Derek</p>
+            <p class="lead">Catch a Train to the Best Neighborhoods in the City</p>
             <h4 id="current-time"></h4>
         </div>
 
         <div class="container" id="schedule-contain">
             <nav class="navbar bg-dark navbar-dark">
-                <p>Current Train Schedule</p>
+                <p>Current Train Schedule</p><i class="far fa-clock"></i>
             </nav>
-            <table class="table table-hover" id="table">
-                <thead>
-                    <th scope="col">Train Name</th>
-                    <th scope="col">Destination</th>
-                    <th scope="col">Frequency (min)</th>
-                    <th scope="col">First Arrival</th>
-                    <th scope="col">Minutes Away</th>
-                </thead>
-                <tbody id="table-body">
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover" id="table">
+                    <thead>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency (min)</th>
+                        <th scope="col">First Arrival</th>
+                        <th scope="col">Minutes Away</th>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="container" id="form-contain">
             <nav class="navbar bg-dark navbar-light">
                 <p>Add Train</p>
+                <i class="fas fa-database"></i>
             </nav>
+            <p class="lead">A note: Time values must be in military notation or you will not be able to add a new train.</p>
             <div class="form-group">
                 <label for="name">Train Name</label>
-                <input type="train" class="form-control" id="name" placeholder="John Doe">
+                <input type="train" class="form-control" id="name" placeholder="Midnight to Georgia">
             </div>
             <div class="form-group">
                 <label for="destination">Destination</label>

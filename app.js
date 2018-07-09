@@ -18,30 +18,35 @@ var trainName;
 var trainDestination;
 var trainTime;
 var trainFrequency;
+var timeUntil;
 
 
 //On referencing the database...
 database.ref().on("child_added", function(snapshot) {
 
-    var newTime = moment();
-    console.log("New current time", newTime);
-    var newTimeObj = moment(snapshot.val().firstTime, "hh:mm");
-    console.log("New First Time: ", newTimeObj)
-    var newDifference = newTime.diff(newTimeObj, 'minutes');
-    console.log("Time between there and now:", newDifference)
+    //setting a new time equal to the current time using the moment api.
+    var time = moment();
+    //Formatting the firstTime database value into a moment with hour:minute value.
+    var timeObj = moment(snapshot.val().firstTime, "hh:mm");
 
-    var newWaitTime = snapshot.val().frequency - (newDifference % snapshot.val().frequency);
-    //snapshot.val().timeUntilNext = newWaitTime
-    console.log("Your new wait time is", newWaitTime)
+    //Calculates the difference between the current moment and the former moment.
+    var difference = time.diff(timeObj, 'minutes');
 
-    var newTableRow = $("<tr>");
+    //The wait time is equal to the remainder of the difference in time between the train's original departure and our current moment subtracted from the frequency of the train's arrival.
+    var waitTime = snapshot.val().frequency - (difference % snapshot.val().frequency);
 
+    //Updating the value for time until next train on the database.
     database.ref().update({
-        timeUntilNext: newWaitTime
+        timeUntilNext: waitTime
     });
 
-    $(newTableRow).html("<th scope='row'>" + snapshot.val().name + "</th><td>" + snapshot.val().destination + "</td><td>" + snapshot.val().frequency + "</td><td>" + snapshot.val().firstTime + "</td><td>" + newWaitTime + "</td>");
+    //Using jQuery API to create a new table row for each element in the firebase. 
+    var newTableRow = $("<tr>");
 
+    //Populating the table row all at once with all necessary values.
+    $(newTableRow).html("<th scope='row'>" + snapshot.val().name + "</th><td>" + snapshot.val().destination + "</td><td>" + snapshot.val().frequency + "</td><td>" + snapshot.val().firstTime + "</td><td>" + waitTime + "</td>");
+
+    //Adding the values to the table.
     $("#table").append(newTableRow);
 
 });
@@ -49,38 +54,30 @@ database.ref().on("child_added", function(snapshot) {
 //On clicking submit...
 $("#submit").on("click", function() {
 
+    //Take the entries from the form and assign them to variables declared above.
     trainName = $("#name").val()
     trainDestination = $("#destination").val()
     trainTime = $("#first-time").val()
     trainFrequency = $("#frequency").val();
 
-    var time = moment();
-    //Take the first train time and set it to a moment.
-    var firstTimeObj = moment(trainTime, "hh:mm");
-    console.log(firstTimeObj)
-    //Take the different between then and now. 
-    var difference = time.diff(firstTimeObj, 'minutes');
-    //Correct the difference figure if it's in the future rather than in the past (eg, if it returns a negative value).
-    if (difference < 0) {
-        difference = difference + 1440;
-    }
-    //Calculate the time until the next train based on the frequency of the train's running subtracting the difference between that time and now.
-    var timeUntil = trainFrequency - (difference % trainFrequency);
-    console.log(timeUntil)
+    currentTime = moment();
+    originalTime = moment(trainTime, "hh:mm");
+    originalDifference = currentTime.diff(originalTime, "minutes");
+    originalWaitTime = trainFrequency - (originalDifference % trainFrequency);
 
+    //Push said variables to the Firebase.
+        database.ref().push({
+            name: trainName,
+            firstTime: trainTime,
+            destination: trainDestination,
+            frequency: trainFrequency,
+            timeUntilNext: originalWaitTime
+        });
 
-    database.ref().push({
-        name: trainName,
-        firstTime: trainTime,
-        destination: trainDestination,
-        frequency: trainFrequency,
-        timeUntilNext: timeUntil
-    });
-
-    //Emptying fields for better UX
-    $("#name").val("");
-    $("#destination").val("");
-    $("#first-time").val("");
-    $("#frequency").val("");
-
+        //Empty the fields for better UX in the event that the user wants to add another train.
+        $("#name").val("");
+        $("#destination").val("");
+        $("#first-time").val("");
+        $("#frequency").val("");
+    
 });

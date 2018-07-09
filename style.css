@@ -1,9 +1,26 @@
+.jumbotron {
+    text-align: center;
+}
+
+nav i {
+    font-size: 25px;
+}
+
+nav p {
+    font-size: 25px;
+    padding: 0;
+    margin: 0px;
+}
 label {
     padding: 15px;
 }
 
 table {
     width: 90%;
+}
+
+#form-contain .lead {
+    padding-top: 20px;
 }
 
 @media screen and (min-width: 750px) {
